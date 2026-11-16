@@ -46,17 +46,40 @@ async function main() {
   // Do the same here. Insert one book that has a publisher field
   // containing an embedded object with at least a name and a country.
 
+  await books.insertOne({
+  title: "The Little Prince",
+  author: "Antoine de Saint-Exupéry",
+  publisher: {
+    name: "Gallimard",
+    country: "France"
+  }
+});
+
   // ----------------------------------------------------------
   // TODO 2 - insertOne with an array
   // ----------------------------------------------------------
   // Insert one book that has a tags field containing
   // an array of at least 3 strings.
 
+await books.insertOne({
+  title: "Dune",
+  author: "Frank Herbert",
+  tags: ["sci-fi", "classic", "space"]
+});
+
   // ----------------------------------------------------------
   // TODO 3 - insertMany
   // ----------------------------------------------------------
   // Insert at least 5 books in a single call using insertMany.
   // Include a mix: some with a publisher object, some with tags, some with both.
+
+await books.insertMany([
+  { title: "Les Misérables", author: "Victor Hugo", publisher: { name: "A. Lacroix", country: "France" } },
+  { title: "1984", author: "George Orwell", tags: ["dystopia", "politics", "classic"] },
+  { title: "Neuromancer", author: "William Gibson", publisher: { name: "Ace", country: "USA" }, tags: ["cyberpunk", "sci-fi", "tech"] },
+  { title: "The Stranger", author: "Albert Camus", publisher: { name: "Gallimard", country: "France" } },
+  { title: "Foundation", author: "Isaac Asimov" }
+]);
 
   // ----------------------------------------------------------
   // TODO 4 - find all documents
