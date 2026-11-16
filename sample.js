@@ -73,13 +73,14 @@ await books.insertOne({
   // Insert at least 5 books in a single call using insertMany.
   // Include a mix: some with a publisher object, some with tags, some with both.
 
-/* await books.insertMany([
+await books.insertMany([
   { title: "Les Misérables", author: "Victor Hugo", publisher: { name: "A. Lacroix", country: "France" } },
   { title: "1984", author: "George Orwell", tags: ["dystopia", "politics", "classic"] },
   { title: "Neuromancer", author: "William Gibson", publisher: { name: "Ace", country: "USA" }, tags: ["cyberpunk", "sci-fi", "tech"] },
   { title: "The Stranger", author: "Albert Camus", publisher: { name: "Gallimard", country: "France" } },
   { title: "Foundation", author: "Isaac Asimov" }
-]); */
+]);
+
   // ----------------------------------------------------------
   // TODO 4 - find all documents
   // ----------------------------------------------------------
