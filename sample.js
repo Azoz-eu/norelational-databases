@@ -86,7 +86,10 @@ await books.insertMany([
   // ----------------------------------------------------------
   // Retrieve every document in the collection and log each title.
   // Hint: find() returns a cursor - call .toArray() to get an array.
-
+  const allBooks = await books.find({}).toArray();
+  allBooks.forEach((book) => {
+    console.log(book.title);
+  });
   // ----------------------------------------------------------
   // TODO 5 - findOne with dot notation
   // ----------------------------------------------------------
@@ -95,11 +98,24 @@ await books.insertMany([
   //   { "publisher.country": "France" }
   // Log the title of the result.
 
+  await books.findOne({ "publisher.country": "France" }).then((book) => {
+    if (book) {
+      console.log(`First book published in France: ${book.title}`);
+    } else {
+      console.log("No book found published in France.");
+    } 
+  });
   // ----------------------------------------------------------
   // TODO 6 - find with a filter
   // ----------------------------------------------------------
   // Find all books whose publisher.country is "France".
   // Log how many there are and list their titles.
+
+  const frenchBooks = await books.find({ "publisher.country": "France" }).toArray();
+  console.log(`Number of books published in France: ${frenchBooks.length}`);
+  frenchBooks.forEach((book) => {
+    console.log(book.title);
+  });
 
   // ----------------------------------------------------------
   // TODO 7 - find with $exists
@@ -107,6 +123,11 @@ await books.insertMany([
   // Find all books that have a tags field, regardless of its value.
   //   { tags: { $exists: true } }
   // Log each title and its tags array.
+
+  const booksWithTags = await books.find({ tags: { $exists: true } }).toArray();
+  booksWithTags.forEach((book) => {
+    console.log(`${book.title}: ${book.tags.join(", ")}`);
+  });
 
   // Always close the connection when you are done.
   await client.close();
