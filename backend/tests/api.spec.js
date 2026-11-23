@@ -26,7 +26,7 @@ test.describe.serial("Users API", () => {
     expect(Array.isArray(body)).toBeTruthy();
   });
 
-  test("GET /users items have name and email fields", async ({ request }) => {
+  test("GET /users/:id seeded user has name and email fields", async ({ request }) => {
     // Test against a known seeded document rather than all users
     const res = await request.get(`/users/${SEEDED_USER_ID}`);
     expect(res.status()).toBe(200);
